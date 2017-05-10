@@ -7,6 +7,8 @@ import java.util.Arrays;
  * 先对需要求排列的字符串进行字典排序，即得到全排列中最小的排列.
  * 然后,找到一个比它大的最小的全排列，一直重复这一步直到找到最大值,即字典排序的逆序列.
  * 
+ * 不需要关心字符串长度
+ * 
  * @author rico
  */
 public class StringPermutationsLoop {
