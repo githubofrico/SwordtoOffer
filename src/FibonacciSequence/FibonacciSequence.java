@@ -113,6 +113,13 @@ public class FibonacciSequence {
 		return -1;
 	}
 
+	  
+	/**     
+	 * @description 使用数组存储斐波那契数列
+	 * @author rico       
+	 * @param n
+	 * @return     
+	 */
 	public static int fibonacci_array(int n) {
 		if (n > 0) {
 			int[] arr = new int[n];   // 使用临时数组存储斐波纳契数列
