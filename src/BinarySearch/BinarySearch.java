@@ -10,6 +10,9 @@ public class BinarySearch {
 
 	/**     
 	 * @description 递归搜索目标值，若搜索成功，则返回目标值的次序(从1开始)；否则，返回-1
+	 * 搜索范围不断地缩小，在每轮搜索过程中，要么找到指定元素，要么缩小范围。
+	 * 这样，最终导致的结果是：正好找到目标元素或者 low > high(不满足递去条件，停止递归，开始归来)
+	 * 
 	 * @author rico       
 	 * @param arr 目标数组
 	 * @param high 右边界
