@@ -8,14 +8,6 @@ package Power11;
  */      
 public class Solution {
 	  
-	/**     
-	 * @description 
-	 * @author rico       
-	 * @created 2017年6月5日 下午6:10:58     
-	 * @param base
-	 * @param exponent
-	 * @return     
-	 */
 	public double Power(double base, int exponent) {
 		if (base == 0) {  // 边界情况
 			return 0;

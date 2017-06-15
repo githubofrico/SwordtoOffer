@@ -2,8 +2,10 @@ package cn.edu.tju.rico.inttree;
 
 import java.util.LinkedList;
 
+
 /**
- * Title: 二叉树(非线性结构)的构建及相关操作 Description:
+ * Title: 二叉树(非线性结构)的构建及相关操作 
+ * Description:
  * 以广义表形式的字符串构建二叉树：'()'前表示根结点，括号中左右子树用逗号隔开，逗号不能省略 二叉树的层次/广序遍历算法
  * 二叉树的前序、中序、后序遍历的递归和非递归算法(对每个节点而言，三种遍历方式都需要遍历该结点三次，三者唯一区别在于该结点的访问时机)
  * 根据二叉树的前序、中序或中序、后序遍历结果构建二叉树 二叉树的高度 二叉树的结点总数 根据树的根结点复制一颗二叉树 获取二叉树的根结点，孩子节点
@@ -100,7 +102,7 @@ public class BinaryTree {
 				flag = false;
 				break;
 			default: // 创建根据内容创建节点
-				TreeNode = new TreeNode(c-48);
+				TreeNode = new TreeNode(c - 48);
 				break;
 			}
 
@@ -346,7 +348,7 @@ public class BinaryTree {
 	 */
 	public TreeNode createBinaryTreeByPreAndIn(String pre, String in) {
 		if (pre.length() > 0) {
-			TreeNode root = new TreeNode(pre.charAt(0)-48);
+			TreeNode root = new TreeNode(pre.charAt(0) - 48);
 			int index = in.indexOf(pre.charAt(0));
 			root.left = createBinaryTreeByPreAndIn(pre.substring(1, index + 1),
 					in.substring(0, index));
@@ -366,7 +368,7 @@ public class BinaryTree {
 	 */
 	public TreeNode createBinaryTreeByInAndPost(String in, String post) {
 		if (post.length() > 0) {
-			TreeNode root = new TreeNode(post.charAt(post.length() - 1)-48);
+			TreeNode root = new TreeNode(post.charAt(post.length() - 1) - 48);
 			int index = in.indexOf(post.charAt(post.length() - 1));
 
 			root.left = createBinaryTreeByInAndPost(in.substring(0, index),
@@ -411,7 +413,7 @@ public class BinaryTree {
 		if (index < preOrderStr.length) {
 			char c = preOrderStr[index++];
 			if (c != '#') { // 递归终止条件
-				TreeNode TreeNode = new TreeNode(c-48);
+				TreeNode TreeNode = new TreeNode(c - 48);
 				TreeNode.left = createTreeByPreOrederStr(preOrderStr, TreeNode); // 递归为当前节点创建左子树
 				TreeNode.right = createTreeByPreOrederStr(preOrderStr, TreeNode); // 递归为当前节点创建右子树
 				return TreeNode;
@@ -419,6 +421,45 @@ public class BinaryTree {
 			return null;
 		}
 		return null;
+	}
+
+	/**
+	 * @description
+	 * @author rico
+	 * @created 2017年6月15日 上午11:40:58
+	 * @param root
+	 */
+	public void Mirror(TreeNode root) {
+		if (root == null) { // 递归终止条件
+			return; // 简单情景的处理
+		} else {
+			// 先对调左右子树
+			TreeNode tmp = root.left;
+			root.left = root.right;
+			root.right = tmp;
+
+			// 再将左右子树分别变换为其对应的镜像
+			Mirror(root.left); // 重复逻辑的提取，缩小问题规模
+			Mirror(root.right); // 重复逻辑的提取，缩小问题规模
+		}
+	}
+	
+	public void Mirror1(TreeNode root) {
+		LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+		while (root != null || !stack.isEmpty()) {
+			if (root != null) {
+				// 先对调左右子树
+				TreeNode tmp = root.left;
+				root.left = root.right;
+				root.right = tmp;
+				if (root.right != null) {
+					stack.push(root.right);
+				}
+				root = root.left;
+			}else{
+				root = stack.pop();
+			}
+		}
 	}
 
 	/**

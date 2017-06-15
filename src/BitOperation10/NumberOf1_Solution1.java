@@ -22,8 +22,8 @@ public class NumberOf1_Solution1 {
 	public int NumberOf1(int n) {
 		int temp = 1;
 		int count = 0;
-		while (temp != 0) {
-			//若(temp & n) == temp,说明n的二进制在对应位置上为1
+		while (temp != 0) {    // 循环结束条件，从1左移变成0即完成所有二进制位的扫描和比对
+			//若(temp & n) == temp,说明n的二进制在对应位置上为 1
 			count = (temp & n) == temp ? ++count : count;  
 			temp = temp << 1;  // temp 不断向左移
 		}
