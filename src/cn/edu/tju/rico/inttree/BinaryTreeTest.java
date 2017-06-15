@@ -80,6 +80,17 @@ public class BinaryTreeTest {
 		System.out.println("根据tree的中序遍历和后序遍历结果构建的tree5为 ："
 				+ tree.getBinaryTree(tree5.getRoot()));
 		System.out.println("tree与tree5是否相等： " + tree.equals(tree5));
+		System.out.println("\n----------------------------------------------\n");
+		
+		BinaryTree tree19 = new BinaryTree();
+		tree19.createBinaryTree("8(6(5,7),2(9,4))");
+		System.out.println("以广义表的形式打印tree19为 ：" + tree19.getBinaryTree(tree19.getRoot()));
+		System.out.println(tree19.getRoot());
+		tree19.Mirror1(tree19.getRoot());
+		System.out.println("以广义表的形式打印tree19为 ：" + tree19.getBinaryTree(tree19.getRoot()));
+		tree19.Mirror(tree19.getRoot());
+		System.out.println("以广义表的形式打印tree19为 ：" + tree19.getBinaryTree(tree19.getRoot()));
+		
 		
 	}
 }

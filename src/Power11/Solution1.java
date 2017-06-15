@@ -1,8 +1,8 @@
 package Power11;
 
 /**
- * Title: 数值的整数次方 Description:
- * 给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+ * Title: 数值的整数次方
+ *  Description:给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
  * 
  * @author rico
  * @created 2017年6月5日 下午4:49:19
@@ -34,16 +34,16 @@ public class Solution1 {
 	private double getPower(double base, int exponent) {
 		// 递归终止条件
 		if (exponent == 0) {
-			return 1.0;
+			return 1.0;  	// 简单情景
 		} else if (exponent == 1) {
-			return base;
+			return base;  	// 简单情景
 		}
 
 		// 递归计算base的(exponent/2)幂
 		exponent = exponent >> 1;
-		double result = getPower(base, exponent);
-		result *= result;
-		if ((exponent & 1) == 1) { 	// 判断一个数是否是奇数，奇数的话，再余外乘一次)('=='优先级高于'&')
+		double result = getPower(base, exponent);   // 提取重复的逻辑，缩小问题规模
+		result *= result;  	// 减少相乘次数
+		if ((exponent & 1) == 1) { 	// 判断一个数是否是奇数，奇数的话，再余外乘一次('=='优先级高于'&')
 			result *= base;
 		}
 

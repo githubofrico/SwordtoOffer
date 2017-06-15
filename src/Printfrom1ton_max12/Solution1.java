@@ -21,15 +21,15 @@ public class Solution1 {
 	public static void print(int n) {
 		if (n == 0) {   // 递归终止条件
 			// 简单情景下的处理
-			String s = trim(result);
-			if (!s.equals("")) {
+			String s = trim(result);   //去除数字前面的0
+			if (!s.equals("")) {     
 				System.out.println(s);
 			}
 		} else {   
 			for (int i = 0; i < 10; i++) {
-				result.append(i);
+				result.append(i);  // 递去
 				print(n - 1);    // 提取重复的逻辑，缩小问题规模
-				result = result.deleteCharAt(result.length() - 1);
+				result = result.deleteCharAt(result.length() - 1);  // 归来
 			}
 		}
 	}
