@@ -9,7 +9,7 @@ package cn.edu.tju.rico.inttree;
  */
 public class TreeNode {
 
-	public int data; // 结点数据
+	public int val; // 结点数据
 	public TreeNode left; // 指向左孩子结点
 	public TreeNode right; // 指向右孩子结点
 	public boolean flag; // 用于非递归后序遍历
@@ -25,8 +25,8 @@ public class TreeNode {
 	 * @param next
 	 *            新元素与链表结合结点
 	 */
-	public TreeNode(int data) {
-		this.data = data;
+	public TreeNode(int val) {
+		this.val = val;
 	}
 
 	public TreeNode() {
@@ -34,7 +34,7 @@ public class TreeNode {
 	
 	@Override
 	public String toString() {
-		return String.valueOf(data);
+		return String.valueOf(val);
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class TreeNode {
 		// TODO Auto-generated method stub
 		if (obj instanceof TreeNode) {
 			TreeNode temp = (TreeNode) obj;
-			if (data == temp.data) {
+			if (val == temp.val) {
 				return true;
 			}
 		}

@@ -196,7 +196,7 @@ public class BinaryTree {
 			queue.add(root);
 			while (!queue.isEmpty()) {
 				TreeNode temp = queue.pop();
-				sb.append(temp.data).append(" ");
+				sb.append(temp.val).append(" ");
 
 				// 在遍历当前节点时，同时将其左右孩子入队
 				if (temp.left != null)
@@ -218,7 +218,7 @@ public class BinaryTree {
 	public String preOrder(TreeNode root) {
 		StringBuilder sb = new StringBuilder(); // 存到递归调用栈
 		if (root != null) { // 递归终止条件
-			sb.append(root.data + " "); // 前序遍历当前结点
+			sb.append(root.val + " "); // 前序遍历当前结点
 			sb.append(preOrder(root.left)); // 前序遍历左子树
 			sb.append(preOrder(root.right)); // 前序遍历右子树
 		}
@@ -239,7 +239,7 @@ public class BinaryTree {
 
 		while (TreeNode != null || !stack.isEmpty()) { // 迭代条件
 			if (TreeNode != null) { // 当前节点不为空
-				sb.append(TreeNode.data + " "); // 访问当前节点
+				sb.append(TreeNode.val + " "); // 访问当前节点
 				stack.push(TreeNode); // 当前节点入栈
 				TreeNode = TreeNode.left; // 遍历其左子树
 			} else {
@@ -261,7 +261,7 @@ public class BinaryTree {
 		StringBuilder sb = new StringBuilder(); // 存到递归调用栈
 		if (root != null) { // 递归终止条件
 			sb.append(inOrder(root.left)); // 中序遍历左子树
-			sb.append(root.data + " "); // 中序遍历当前结点
+			sb.append(root.val + " "); // 中序遍历当前结点
 			sb.append(inOrder(root.right)); // 中序遍历右子树
 		}
 		return sb.toString();
@@ -285,7 +285,7 @@ public class BinaryTree {
 				TreeNode = TreeNode.left; // 遍历其左子树
 			} else {
 				TreeNode = stack.pop(); // 父节点弹栈
-				sb.append(TreeNode.data + " "); // 访问父节点
+				sb.append(TreeNode.val + " "); // 访问父节点
 				TreeNode = TreeNode.right; // 遍历访问其右子树
 			}
 		}
@@ -304,7 +304,7 @@ public class BinaryTree {
 		if (root != null) { // 递归终止条件
 			sb.append(postOrder(root.left)); // 后序遍历左子树
 			sb.append(postOrder(root.right)); // 后序遍历右子树
-			sb.append(root.data + " "); // 后序遍历当前结点
+			sb.append(root.val + " "); // 后序遍历当前结点
 		}
 		return sb.toString();
 	}
@@ -332,7 +332,7 @@ public class BinaryTree {
 					stack.push(TreeNode); // 只有在第三次才访问，因此，前节点再次压栈
 					TreeNode = TreeNode.right; // 访问该节点的右子树
 				} else { // 第三次访问该节点
-					sb.append(TreeNode.data + " "); // 访问
+					sb.append(TreeNode.val + " "); // 访问
 					TreeNode = null; // 当前节点的左子树、右子树及本身均已访问,需要访问工作栈中的节点
 				}
 			}
@@ -392,7 +392,7 @@ public class BinaryTree {
 		if (root == null)
 			return null;
 		TreeNode TreeNode = new TreeNode();
-		TreeNode.data = root.data;
+		TreeNode.val = root.val;
 		TreeNode.left = copy(root.left);
 		TreeNode.right = copy(root.right);
 		return TreeNode;
@@ -534,7 +534,7 @@ public class BinaryTree {
 	public static String getBinaryTree(TreeNode root) {
 		StringBuilder sb = new StringBuilder();
 		if (root != null) {
-			sb.append(root.data);
+			sb.append(root.val);
 			if (root.left != null || root.right != null) {
 				sb.append('(');
 				sb.append(getBinaryTree(root.left));
@@ -555,7 +555,7 @@ public class BinaryTree {
 	 */
 	public static void printBinaryTree(TreeNode root) {
 		if (root != null) {
-			System.out.print(root.data);
+			System.out.print(root.val);
 			if (root.left != null || root.right != null) {
 				System.out.print('(');
 				printBinaryTree(root.left);
