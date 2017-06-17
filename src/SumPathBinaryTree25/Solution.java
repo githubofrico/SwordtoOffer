@@ -30,8 +30,8 @@ public class Solution {
 				int sum = 0;
 				ArrayList<Integer> temp = new ArrayList<Integer>();
 				for (TreeNode node : path) {
-					sum += node.data;
-					temp.add(node.data);
+					sum += node.val;
+					temp.add(node.val);
 				}
 				
 				// 路径上结点的和是否与目标值相等
