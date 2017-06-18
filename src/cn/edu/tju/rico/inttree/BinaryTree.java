@@ -90,6 +90,19 @@ public class BinaryTree {
 
 		for (int i = 0; i < exp.length(); i++) { // 逐个读入表达式的各个字符
 			char c = exp.charAt(i);
+			StringBuilder sb = new StringBuilder();
+			if (48 <= c && c <= 57) {
+				sb.append(c);
+				while (i + 1 < exp.length()) {
+					char tmp = exp.charAt(i+1);
+					if (48 <= tmp && tmp <= 57) {
+						sb.append(exp.charAt(i+1));
+						i++;
+					}else{
+						break;
+					}
+				}
+			}
 			switch (c) {
 			case '(': // 当前节点有孩子节点，入栈以便设置其孩子
 				stack.push(temp);
@@ -102,7 +115,7 @@ public class BinaryTree {
 				flag = false;
 				break;
 			default: // 创建根据内容创建节点
-				TreeNode = new TreeNode(c - 48);
+				TreeNode = new TreeNode(Integer.valueOf(sb.toString()));
 				break;
 			}
 
@@ -565,7 +578,62 @@ public class BinaryTree {
 			}
 		}
 	}
-
+	  
+	/**     
+	 * @description 二叉搜索树转换为排序后的双向链表
+	 * @author rico       
+	 * @created 2017年6月18日 上午11:39:59     
+	 * @param pRootOfTree
+	 * @return     
+	 */
+	public TreeNode Convert(TreeNode pRootOfTree) {
+		if (pRootOfTree == null) {
+			return null;
+		}else{
+			TreeNode list1 = Convert(pRootOfTree.left);  // 左子树转换成双向链表1
+			TreeNode list2 = Convert(pRootOfTree.right); // 右子树转换成双向链表2
+			
+			if (list1 == null && list2 == null) {  // 叶节点
+				pRootOfTree.left = pRootOfTree;
+				pRootOfTree.right = pRootOfTree;
+				return pRootOfTree;
+			}else if (list1 == null && list2 != null) {  // 左孩子为空
+				TreeNode tmp = list2.left;  // 链表的尾节点
+				pRootOfTree.right = list2;
+				list2.left = pRootOfTree;
+				
+				pRootOfTree.left = tmp;
+				tmp.right = pRootOfTree;
+				
+				return pRootOfTree;
+			}else if (list1 != null && list2 == null){  // 右孩子为空
+				TreeNode tmp = list1.left;  // 链表的尾节点
+				tmp.right = pRootOfTree;
+				pRootOfTree.left = tmp;
+				
+				list1.left = pRootOfTree;
+				pRootOfTree.right = list1;
+				
+				return list1;
+			}else{          // 左、右孩子
+				// 双向链表1的尾节点与根结点相连
+				TreeNode tmp1 = list1.left;  // 双向链表1的尾结点			
+				tmp1.right = pRootOfTree;
+				pRootOfTree.left = tmp1;
+				
+				// 双向链表1的头结点与双向链表2的尾节点相连
+				TreeNode tmp2 = list2.left;  // 双向链表2的尾结点
+				list1.left = tmp2;
+				tmp2.right = list1;
+				
+				// 根结点与双向链表2的头节点相连
+				pRootOfTree.right = list2;
+				list2.left = pRootOfTree;
+				return list1;
+			}
+		}
+	}
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

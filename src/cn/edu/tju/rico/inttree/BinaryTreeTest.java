@@ -90,7 +90,37 @@ public class BinaryTreeTest {
 		System.out.println("以广义表的形式打印tree19为 ：" + tree19.getBinaryTree(tree19.getRoot()));
 		tree19.Mirror(tree19.getRoot());
 		System.out.println("以广义表的形式打印tree19为 ：" + tree19.getBinaryTree(tree19.getRoot()));
+		System.out.println("\n----------------------------------------------\n");
 		
+		BinaryTree tree20 = new BinaryTree();
+//		tree20.createBinaryTree("5(2(1,4),8(6,9))");
+//		tree20.createBinaryTree("5(2(1,),8(6,9))");
+		tree20.createBinaryTree("5(2(1,),8(1,9))");
+//		tree20.createBinaryTree("5");
+		System.out.println("以广义表的形式打印tree20为 ：" + tree20.getBinaryTree(tree20.getRoot()));
+		System.out.println("tree20根为： " + tree20.getRoot());
+		TreeNode delist = tree20.Convert(tree20.getRoot());
+		TreeNode cur1 = delist;
+		System.out.println("正向打印delist： ");
+		while(cur1!= null){
+			System.out.print(cur1.val + " ");
+			cur1 = cur1.right;
+			if (cur1.right == delist) {
+				System.out.print(cur1.val + " ");
+				break;
+			}
+		}
+		System.out.println();
 		
+		System.out.println("反向打印delist： ");
+		while(cur1!= null){
+			System.out.print(cur1.val + " ");
+			cur1 = cur1.left;
+			if (cur1 == delist ) {
+				System.out.print(cur1.val + " ");
+				break;
+			}
+		}
+		System.out.println();
 	}
 }

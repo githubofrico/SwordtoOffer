@@ -35,7 +35,7 @@ public class Solution {
 		} else {
 			int root = sequence[to];  //根结点
 			// 找到左右子树的边界
-			int border = from;
+			int border = from; 
 			for (int i = from; i < to; i++) {
 				if (sequence[i] < root) {
 					border++;
