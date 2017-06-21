@@ -17,10 +17,12 @@ public class Solution1 {
 	 * 
 	 * 中位数：对于有限的数集，可以通过把所有观察值高低排序后找出正中间的一个作为中位数。
 	 * 
+	 * 我们知道，若给定序列长度n为偶数，那么中位数就会有两个元素；若给定序列长度n为奇数，
+	 * 那么中位数就只有一个元素。但就本题来说，由于我们在后期还需要验证，取n/2就可以了。
+	 *  
 	 * @author rico
 	 * @created 2017年6月3日 上午8:38:04
 	 * @param input 原始序列
-	 * @param k 第K大元素
 	 * @return
 	 */
 	 public int MoreThanHalfNum_Solution(int[] input) {
