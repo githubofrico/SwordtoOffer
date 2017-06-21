@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
- * Title: 字符串的排列(递归法)
+ * Title: 字符串的排列(递归法):字符串的长度超过9就比较慢了，甚至短时间内计算不出结果
  * Description:
  * 输入一个字符串(长度不超过9(可能有字符重复),字符只包括大小写字母),按字典序打印出该字符串中字符的所有排列。
  * 例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
@@ -72,24 +72,9 @@ public class Solution {
 	}
 
 	public static void main(String[] args) {
-		ArrayList<String> strs = new Solution().Permutation("aab");
-		Collections.sort(strs);
-		System.out.println(strs);
-		String s = null;
-		for (Iterator<String> iterator = strs.iterator(); iterator.hasNext();) {
-			if (s == null) {
-				s = (String) iterator.next();
-			}
-			while (iterator.hasNext()) {
-				String tmp = (String) iterator.next();
-				if (s.equals(tmp)) {
-					iterator.remove();  
-				} else {
-					s = tmp;
-					break;
-				}
-			}
+		ArrayList<String> strs = new Solution().Permutation("abcdefghij");
+		for (String str : strs) {
+			System.out.println(str);
 		}
-		System.out.println(strs);
 	}
 }

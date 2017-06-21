@@ -1,10 +1,9 @@
 package GetLeastKNumbers30;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
- * Title: 最小的K个数 
+ * Title: 最小的K个数 (等价于寻找第K大数)
  * Description: 输入n个整数，找出其中最小的K个数。例如输入4,5,1,6,2,7,3,8这8个数字，
  * 则最小的4个数字是1,2,3,4。
  * 
@@ -31,7 +30,7 @@ public class Solution1 {
 			int end = input.length - 1;
 			int index = partition(input, start, end);
 			while (index != k - 1) { // 循环终止条件：划分的正好
-			// System.out.println(Arrays.toString(input));
+				// System.out.println(Arrays.toString(input));
 				if (index > k - 1) { // 划得大了
 					end = index - 1;
 					index = partition(input, start, end);
