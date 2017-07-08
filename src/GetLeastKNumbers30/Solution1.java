@@ -32,11 +32,11 @@ public class Solution1 {
 			while (index != k - 1) { // 循环终止条件：划分的正好
 				// System.out.println(Arrays.toString(input));
 				if (index > k - 1) { // 划得大了
-					end = index - 1;
+					end = index - 1; 
 					index = partition(input, start, end);
 				} else { // 划得小了
 					start = index + 1;
-					index = partition(input, index + 1, end);
+					index = partition(input, start, end);
 				}
 			}
 
