@@ -1,7 +1,21 @@
 package Offer62;
 
+/**
+ * Title:序列化二叉树(前序遍历的应用,遇到Null用特殊字符"#"代替) 
+ * Description: 请实现两个函数，分别用来序列化和反序列化二叉树
+ * 
+ * @author rico
+ * @created 2017年7月8日 上午10:07:52
+ */
 public class Solution {
 
+	/**     
+	 * @description 前序遍历序列化二叉树
+	 * @author rico       
+	 * @created 2017年7月9日 上午8:34:24     
+	 * @param root
+	 * @return     
+	 */
 	String Serialize(TreeNode root) {
 		if (root == null) {
 			return "# ";
