@@ -40,7 +40,7 @@ public class Solution {
 			int k = i;
 			int m = j;
 			System.out.println("K : " + k + ", M : " + m);
-			matrix[k * cols + m] = true;
+			matrix[k * cols + m] = true;    // 达到该格子
 
 			int result1 = 0;
 			int result2 = 0;

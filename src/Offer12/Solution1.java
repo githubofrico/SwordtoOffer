@@ -29,7 +29,7 @@ public class Solution1 {
 			for (int i = 0; i < 10; i++) {
 				result.append(i);  // 递去
 				print(n - 1);    // 提取重复的逻辑，缩小问题规模
-				result = result.deleteCharAt(result.length() - 1);  // 归来
+				result = result.deleteCharAt(result.length()-1);  // 归来
 			}
 		}
 	}
@@ -50,6 +50,6 @@ public class Solution1 {
 	}
 
 	public static void main(String[] args) {
-		Solution1.print(5);
+		Solution1.print(3);
 	}
 }

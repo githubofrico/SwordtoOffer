@@ -1,5 +1,7 @@
 package Offer66;
 
+import java.util.Arrays;
+
 /**
  * Title:矩阵中的路径
  * Description:请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一个格子开始
@@ -13,7 +15,7 @@ package Offer66;
  * @author rico
  * @created 2017年7月9日 下午12:09:59
  */
-public class Solution {
+public class Solution1 {
 
 	/**
 	 * @description 尝试所有的入口，寻找与str相匹配的路径
@@ -33,23 +35,19 @@ public class Solution {
 				|| str.length == 0) { // 边界条件
 			return false;
 		} else {
-			boolean result = false;
 			int index = 0;
-			char target = str[index];
-			// 搜寻并尝试从所有入口位置开始查找，直到有路径与str匹配或没有对应的入口可以使路径与str匹配
+			boolean[] flag = new boolean[matrix.length];
+			System.out.println("初始状态 ： " + Arrays.toString(flag));
+			System.out.println("-----------------------------------");
+			// 尝试从所有入口位置开始查找
 			for (int i = 0; i < rows; i++) {
 				for (int j = 0; j < cols; j++) {
-					if (matrix[i * cols + j] == target) { // 入口处
-						boolean[] flag = new boolean[matrix.length];
-						result = hasPathCore(matrix, rows, cols, i, j, str,
-								index, flag);
-						if (result) { // 若成功，则直接返回；否则，从下一个入口处尝试
-							return result;
-						}
+					if (hasPathCore(matrix, rows, cols, i, j, str, index, flag)) {
+						return true;
 					}
 				}
 			}
-			return result;
+			return false;
 		}
 	}
 
@@ -76,19 +74,19 @@ public class Solution {
 	 */
 	public boolean hasPathCore(char[] matrix, int rows, int cols, int i, int j,
 			char[] str, int index, boolean[] flag) {
-		if (index == str.length - 1) {
-			return true;
-		} else {
+		if (i >= 0 && i < rows && j >= 0 && j < cols && !flag[i * cols + j]
+				&& str[index] == matrix[i * cols + j]) {
+			if (index == str.length-1) {  // 递归终止条件
+				return true;
+			}
 			boolean result = false;
-			int k = i;
-			int m = j;
-			System.out.println("K : " + k + ", M : " + m);
+			System.out.println("I : " + i + ", J : " + j);
 			System.out.println("index : " + index);
-			flag[k * cols + m] = true;
+			flag[i * cols + j] = true;
+			index++;
+			System.out.println("状态 ： " + Arrays.toString(flag));
+			System.out.println("-----------------------------------");
 
-			
-			
-			
 			// 穷举四种可能
 			boolean r1 = false;
 			boolean r2 = false;
@@ -96,58 +94,42 @@ public class Solution {
 			boolean r4 = false;
 
 			// 向右
-			if (m + 1 < cols && !flag[k * cols + m + 1]
-					&& str[index + 1] == matrix[k * cols + m + 1]) {
-				flag[k * cols + m + 1] = true;
-				r1 = hasPathCore(matrix, rows, cols, i, j + 1, str, index + 1,
-						flag);
-			}
-
+			r1 = hasPathCore(matrix, rows, cols, i, j + 1, str, index, flag);
 			// 向下
-			if (k + 1 < rows && !flag[k * cols + m + cols]
-					&& str[index + 1] == matrix[k * cols + m + cols]) {
-				flag[k * cols + m + cols] = true;
-				r2 = hasPathCore(matrix, rows, cols, i + 1, j, str, index + 1,
-						flag);
-			}
-
+			r2 = hasPathCore(matrix, rows, cols, i + 1, j, str, index, flag);
 			// 向左
-			if (m - 1 >= 0 && !flag[k * cols + m - 1]
-					&& str[index + 1] == matrix[k * cols + m - 1]) {
-				flag[k * cols + m - 1] = true;
-				r3 = hasPathCore(matrix, rows, cols, i, j - 1, str, index + 1,
-						flag);
-			}
-
+			r3 = hasPathCore(matrix, rows, cols, i, j - 1, str, index, flag);
 			// 向上
-			if (k - 1 >= 0 && !flag[k * cols + m - cols]
-					&& str[index + 1] == matrix[k * cols + m - cols]) {
-				flag[k * cols + m - cols] = true;
-				r4 = hasPathCore(matrix, rows, cols, i - 1, j, str, index + 1,
-						flag);
-			}
+			r4 = hasPathCore(matrix, rows, cols, i - 1, j, str, index, flag);
 
 			result = r1 || r2 || r3 || r4; // 穷举
+
+			// 路径回退
 			if (!result) {
 				--index;
-				flag[k * cols + m] = false;
+				flag[i * cols + j] = false;
+				System.out.println("回退状态 ： " + Arrays.toString(flag));
 			}
 			return result;
+		} else { // 递归终止条件
+			return false;
 		}
 	}
 
 	public static void main(String[] args) {
-		Solution s = new Solution();
-		// char[] matrix = { 'A', 'B', 'C', 'E', 'H', 'J', 'I', 'G', 'S', 'F',
-		// 'C', 'S', 'L', 'O', 'P', 'Q', 'A', 'D', 'E', 'E', 'M', 'N',
-		// 'O', 'E', 'A', 'D', 'I', 'D', 'E', 'J', 'F', 'M', 'V', 'C',
-		// 'E', 'I', 'F', 'G', 'G', 'S' };
-		char[] matrix = { 'A', 'B', 'D', 'B', 'C', 'O' };
-		int rows = 2;
-		int cols = 3;
-		// char[] str = { 'S', 'G', 'G', 'F', 'I', 'E', 'C', 'V', 'A', 'A', 'S',
-		// 'A', 'B', 'C', 'E', 'H', 'J', 'I', 'G', 'Q', 'E', 'M' };
-		char[] str = { 'A', 'B', 'C', 'B', 'D' };
+		Solution1 s = new Solution1();
+//		char[] matrix = { 'A', 'B', 'C', 'E', 'H', 'J', 'I', 'G', 'S', 'F',
+//				'C', 'S', 'L', 'O', 'P', 'Q', 'A', 'D', 'E', 'E', 'M', 'N',
+//				'O', 'E', 'A', 'D', 'I', 'D', 'E', 'J', 'F', 'M', 'V', 'C',
+//				'E', 'I', 'F', 'G', 'G', 'S' };
+		 char[] matrix = { 'A', 'B', 'D', 'B', 'C', 'O' };
+		 int rows = 2;
+		 int cols = 3;
+//		int rows = 5;
+//		int cols = 8;
+//		char[] str = { 'S', 'G', 'G', 'F', 'I', 'E', 'C', 'V', 'A', 'A', 'S',
+//				'A', 'B', 'C', 'E', 'H', 'J', 'I', 'G', 'Q', 'E', 'M' };
+		 char[] str = { 'A', 'B', 'C', 'B', 'D' };
 		System.out.println(s.hasPath(matrix, rows, cols, str));
 	}
 }
