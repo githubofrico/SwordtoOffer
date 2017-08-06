@@ -19,7 +19,7 @@ public class Solution1 {
 				return true;
 			} else if (str.length != 0 && pattern.length == 0) { // 边界条件:字符串长度为0，模式串长度不为0
 				return false;
-			} else {	 // 匹配处理
+			} else { // 匹配处理
 				return matchCore(str, pattern, 0, 0, str.length, pattern.length);
 			}
 		}
@@ -45,37 +45,34 @@ public class Solution1 {
 	 */
 	public boolean matchCore(char[] str, char[] pattern, int p1, int p2,
 			int n1, int n2) {
-		if (p1 == n1 && p2 == n2) { 	// 递归终止条件：字符串指针、模式串指针同时扫描完毕
+		if (p1 == n1 && p2 == n2) { // 递归终止条件：字符串指针、模式串指针同时扫描完毕
 			return true;
-		} else if (p1 != n1 && p2 == n2) { 	// 递归终止条件：字符串指针未扫描完毕，模式串指针扫描完毕
+		} else if (p1 != n1 && p2 == n2) { // 递归终止条件：字符串指针未扫描完毕，模式串指针扫描完毕
 			return false;
-		} else {  	//字符串和模式串都未扫描完毕，或者字符串扫描完毕但模式串未扫描完毕
-			// 模式串当前字符的下一个字符为'*'
-			if (p2 + 1 < n2 && pattern[p2 + 1] == '*') {
-				if ((pattern[p2] == '.' && p1 < n1)
-						|| (p1 < n1 && str[p1] == pattern[p2])) { // 注意p1指针的越界情况
+		} else { 
+			if (p2 + 1 < n2 && pattern[p2 + 1] == '*') {    // 模式串当前字符的下一个字符为'*'
+				if (p1 < n1 && (pattern[p2] == '.' || str[p1] == pattern[p2])) { // 字符串未扫描完毕且当前字符匹配
 					// 穷举所有情况
 					return matchCore(str, pattern, p1 + 1, p2 + 2, n1, n2) // 字符串移动1位，模式串移动2位
 							|| matchCore(str, pattern, p1 + 1, p2, n1, n2) // 字符串移动1位，模式串不移动
 							|| matchCore(str, pattern, p1, p2 + 2, n1, n2); // 字符串不移动，模式串移动1位
-				} else { // 模式串与字符串对应字符不匹配，或者字符串扫描到末尾但模式串还未到末尾(且其下一个字符是'*')
+				} else { // 字符串扫描完毕或者当前字符不匹配
 					return matchCore(str, pattern, p1, p2 + 2, n1, n2);
 				}
+			} else {  // 模式串当前字符的下一个字符不为'*'
+				if (p1 < n1 && (pattern[p2] == '.' || str[p1] == pattern[p2])) {   // 字符串未扫描完毕且当前字符匹配
+					return matchCore(str, pattern, p1 + 1, p2 + 1, n1, n2);
+				} else {  // 字符串扫描完毕或者当前字符不匹配
+					return false;
+				}
 			}
-
-			// 模式串当前字符的下一个字符不为'*'
-			if ((pattern[p2] == '.' && p1 < n1)
-					|| (p1 < n1 && str[p1] == pattern[p2])) {
-				return matchCore(str, pattern, p1 + 1, p2 + 1, n1, n2);
-			}
-			return false;
 		}
 	}
 
 	public static void main(String[] args) {
 		Solution1 s = new Solution1();
-		String str = "aaa";
-		String pattern = "ab*a*c*a";
+		String str = "";
+		String pattern = ".*";
 		System.out.println(s.match(str.toCharArray(), pattern.toCharArray()));
 	}
 }
